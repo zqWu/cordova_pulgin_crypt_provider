@@ -1,31 +1,32 @@
-# cordova_pulgin_mdm
-a cordova mdm plugin
+sample usage
 
-
-mdm command sample
 ```
-{
-	"info": "mdm",
-	"abort_if_fail_one":"false"
-	"list":[
-	    {"type": "password_reset", "args": ["123456"]},
-	    {"type": "password_min_len", "args": ["6"]},
-	    {"type": "password_quality", "args": ["alpha_digit | alpha_digit_symbol"]},
-	    {"type": "password_min_letter", "args": ["5"]},
-	    {"type": "password_min_letter_low", "args": ["3"]},
-	    {"type": "password_min_digit", "args": ["3"]},
-	    {"type": "password_min_letter_low", "args": ["3"]},
-	    {"type": "password_expire_time", "args": ["30000"]},
-	    {"type": "password_history_restrict", "args": ["6"]},
-	    {"type": "password_max_fail", "args": ["3"]},
-	    {"type": "lock_screen", "args": []},
-	    {"type": "timeout_screen", "args": ["3000"]},
-	    {"type": "storage_crypt", "args": ["true|false"]}     
-	]
-}
+#!/bin/bash
+
+# create project
+cordova create hello com.example.hello HelloWorld
+
+# platform android
+cd hello
+cordova platform add android
+
+# install
+plugman install --project . --platform android --plugin org.wzq.android.cryptprovider
 ```
 
-test:
-res/xml/config.xml,
-index=index.html ->
-index=mdm_test.html
+in Project[HelloWorld] com.example.hello.CordovaApp.java
+```
+		loadUrl(ProviderCrypt.getCombineURL(launchUrl));
+//		loadUrl(launchUrl);
+```
+
+modify config.xml
+```
+    <content src="test_crypt.html" />
+```
+modify Project[CordovaApp-CordovaLib] org.apache.cordova.CordovaBridge.java
+line 165, support content://
+```
+//if ( origin.startsWith("file:") || (origin.startsWith("http") && loadedUrl.startsWith(origin))) {
+if (origin.startsWith("content://")|| origin.startsWith("file:") || (origin.startsWith("http") && loadedUrl.startsWith(origin))) {
+```
