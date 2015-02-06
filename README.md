@@ -28,5 +28,5 @@ modify Project[CordovaApp-CordovaLib] org.apache.cordova.CordovaBridge.java
 line 165, support content://
 ```
 //if ( origin.startsWith("file:") || (origin.startsWith("http") && loadedUrl.startsWith(origin))) {
-if (<font color="red">origin.startsWith("content://")||<font> origin.startsWith("file:") || (origin.startsWith("http") && loadedUrl.startsWith(origin))) {
+if ( origin.startsWith("content://")|| origin.startsWith("file:") || (origin.startsWith("http") && loadedUrl.startsWith(origin))) {
 ```
