@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    id="org.wzq.android.cryptprovider"
+    version="0.0.2">
+
+    <name>cryptprovider</name>
+    <description>cordova plugin cryptprovider</description>
+    <author>wzq</author>
+    <keywords>cordova,plugin,cryptprovider</keywords>
+    <license>Apache 2.0 License</license>
+
+    <dependency id="org.wzq.android.crypt"/>
+
+    <platform name="android">
+		<!-- java src code -->
+        <source-file src="src/ProviderCrypt.java" target-dir="src/org/wzq/android/provider/"/>
+
+		<!-- manifest config -->
+		<config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <provider
+                android:name="org.wzq.android.provider.ProviderCrypt"
+                android:authorities="org.wzq.android.provider.ProviderCrypt" />
+        </config-file>
+    </platform>
+
+    <engines>
+        <engine name="cordova" version=">=3.5.0" platform="android"/>
+        <engine name="cordova-plugman" version=">=3.5.0" platform="android"/>
+    </engines>
+
+</plugin>
